@@ -70,7 +70,8 @@ project "sciter-pdf"
         "PDF.cpp",
         "PDF.h",
         "Page.cpp",
-        "Doc.cpp"
+        "Doc.cpp",
+        "Image.cpp"
     }
     
     includeSciter()
