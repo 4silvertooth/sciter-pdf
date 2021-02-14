@@ -15,10 +15,11 @@ class Page : public sciter::om::asset<Page> {
     sciter::value TALIGN_RIGHT = HPDF_TALIGN_RIGHT;
     sciter::value TALIGN_CENTER = HPDF_TALIGN_CENTER;
     sciter::value TALIGN_JUSTIFY = HPDF_TALIGN_JUSTIFY;
+    /**
     sciter::value TALIGN_TOP = HPDF_TALIGN_TOP;
     sciter::value TALIGN_BOTTOM = HPDF_TALIGN_BOTTOM;
     sciter::value TALIGN_MIDDLE = HPDF_TALIGN_MIDDLE;
-
+    */
     sciter::value SIZE_LETTER = HPDF_PAGE_SIZE_LETTER;
     sciter::value SIZE_LEGAL = HPDF_PAGE_SIZE_LEGAL;
     sciter::value SIZE_A3 = HPDF_PAGE_SIZE_A3;
@@ -99,9 +100,9 @@ class Page : public sciter::om::asset<Page> {
         SOM_RO_PROP(TALIGN_RIGHT),
         SOM_RO_PROP(TALIGN_CENTER),
         SOM_RO_PROP(TALIGN_JUSTIFY),
-        SOM_RO_PROP(TALIGN_TOP),
+        /**SOM_RO_PROP(TALIGN_TOP),
         SOM_RO_PROP(TALIGN_BOTTOM),
-        SOM_RO_PROP(TALIGN_MIDDLE),
+        SOM_RO_PROP(TALIGN_MIDDLE),*/
         SOM_RO_PROP(SIZE_LETTER),
         SOM_RO_PROP(SIZE_LEGAL),
         SOM_RO_PROP(SIZE_A3),

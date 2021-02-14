@@ -25,9 +25,9 @@ function includeSciter()
 end	
 
 function includeHaru()
-	includedirs "./sub-module/libharu/include"
-  libdirs "./sub-module/libharu/lib"
-  links "libhpdf"
+	includedirs {"./sub-modules/libharu/build/include", "./sub-modules/libharu/include" , }
+  libdirs {"./sub-modules/libharu/build/src", "./sub-modules/libharu/build/src/Release"} 
+  links "libhpdfs"
 end	
 
 workspace "sciter-pdf"
@@ -58,13 +58,11 @@ workspace "sciter-pdf"
 outputdir = "lib/"
 
 project "sciter-pdf"
-    filter "*Static"
-      kind "StaticLib"
-
-    filter "*DLL"
-      kind "SharedLib"
-
     language "C++"
+    staticruntime "Off"
+    filter "system:windows"
+      files {"sciter-pdf.def" }
+    filter {}
 
     files {
         "PDF.cpp",
@@ -77,3 +75,8 @@ project "sciter-pdf"
     includeSciter()
     includeHaru()    
     
+    filter "*Static"
+      kind "StaticLib"
+
+    filter "*DLL"
+      kind "SharedLib"
