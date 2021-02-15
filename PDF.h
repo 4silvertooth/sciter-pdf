@@ -8,7 +8,6 @@
 namespace libharu {
 class Image;
 class Page : public sciter::om::asset<Page> {
-    HPDF_Doc  pdf;
     HPDF_Page page;
 
     sciter::value TALIGN_LEFT = HPDF_TALIGN_LEFT;
@@ -38,7 +37,7 @@ class Page : public sciter::om::asset<Page> {
 
   public:
 
-    Page(HPDF_Doc& _pdf) : pdf(_pdf) {
+    Page(HPDF_Doc& pdf) {
         page = HPDF_AddPage (pdf);
     }
     virtual ~Page() {};
@@ -136,7 +135,7 @@ class Doc : public sciter::om::asset<Doc> {
     int setPassword(sciter::astring, sciter::astring);
     sciter::value loadJpegImageFromFile(sciter::astring);
     sciter::value loadPngImageFromFile(sciter::astring);
-    sciter::value getFont(sciter::astring, sciter::value encoding);
+    sciter::value getFont(sciter::astring, sciter::astring);
 
     SOM_PASSPORT_BEGIN(Doc)
     SOM_PASSPORT_FLAGS(SOM_EXTENDABLE_OBJECT)
@@ -155,14 +154,13 @@ class Doc : public sciter::om::asset<Doc> {
 };
 
 class Image : public sciter::om::asset<Image> {
-    HPDF_Doc    pdf;
     HPDF_Image  image;
 
   public:
     static const int JPEG = 1;
     static const int PNG = 2;
 
-    Image(HPDF_Doc& _pdf, const char* filename, int type) : pdf(_pdf) {
+    Image(HPDF_Doc& pdf, const char* filename, int type) {
         if(type == JPEG) {
             image = HPDF_LoadJpegImageFromFile(pdf, filename);
         } else if(type == PNG) {
@@ -189,14 +187,13 @@ class Image : public sciter::om::asset<Image> {
 };
 
 class Font : public sciter::om::asset<Image> {
-    HPDF_Doc    pdf;
     HPDF_Font   font;
 
   public:
 
-    Font(HPDF_Doc& _pdf, const char* name, sciter::value encoding) : pdf(_pdf) {
-      if(encoding.is_string()){
-        font = HPDF_GetFont(pdf, name, aux::w2a(encoding.to_string().c_str()));
+    Font(HPDF_Doc& pdf, const char* name, sciter::astring encoding) {
+      if(!encoding.empty()){
+        font = HPDF_GetFont(pdf, name, encoding.c_str());
       }
       else {
         font = HPDF_GetFont(pdf, name, NULL);
@@ -209,7 +206,6 @@ class Font : public sciter::om::asset<Image> {
 
     SOM_PASSPORT_BEGIN(Font)
     SOM_PASSPORT_FLAGS(SOM_SEALED_OBJECT)
-    SOM_FUNCS()
     SOM_PASSPORT_END
 };
 
