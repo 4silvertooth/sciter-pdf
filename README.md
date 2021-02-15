@@ -20,7 +20,7 @@ cmake -S ./sub-modules/libharu -B ./sub-modules/libharu/build
 ./premake5 [OPTION] --sciter="PATH/TO/SCITER-SDK"
 ```
 
-where `[OPTION]` is your prefered platform in premake5.
+where `[OPTION]` is your prefered platform in premake5, and `"PATH/TO/SCITER-SDK"` is well path to sciter-sdk. 
 
 Open the generated project from `/build` and compile.
 
