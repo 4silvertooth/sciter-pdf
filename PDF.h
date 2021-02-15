@@ -55,7 +55,7 @@ class Page : public sciter::om::asset<Page> {
     int moveTextPos(HPDF_REAL, HPDF_REAL);
     int showText(sciter::astring);
     int endText();
-    int setFontAndSize(sciter::astring, HPDF_REAL);
+    int setFontAndSize(sciter::value, HPDF_REAL);
     int moveTo(HPDF_REAL, HPDF_REAL);
     int lineTo(HPDF_REAL, HPDF_REAL);
     int measureText(sciter::astring, HPDF_REAL, HPDF_BOOL);
@@ -100,7 +100,7 @@ class Page : public sciter::om::asset<Page> {
         SOM_RO_PROP(TALIGN_RIGHT),
         SOM_RO_PROP(TALIGN_CENTER),
         SOM_RO_PROP(TALIGN_JUSTIFY),
-        /**SOM_RO_PROP(TALIGN_TOP),
+     /**SOM_RO_PROP(TALIGN_TOP),
         SOM_RO_PROP(TALIGN_BOTTOM),
         SOM_RO_PROP(TALIGN_MIDDLE),*/
         SOM_RO_PROP(SIZE_LETTER),
@@ -136,6 +136,7 @@ class Doc : public sciter::om::asset<Doc> {
     int setPassword(sciter::astring, sciter::astring);
     sciter::value loadJpegImageFromFile(sciter::astring);
     sciter::value loadPngImageFromFile(sciter::astring);
+    sciter::value getFont(sciter::astring, sciter::value encoding);
 
     SOM_PASSPORT_BEGIN(Doc)
     SOM_PASSPORT_FLAGS(SOM_EXTENDABLE_OBJECT)
@@ -147,7 +148,8 @@ class Doc : public sciter::om::asset<Doc> {
         SOM_FUNC(loadTTFontFromFile),
         SOM_FUNC(setPassword),
         SOM_FUNC(loadJpegImageFromFile),
-        SOM_FUNC(loadPngImageFromFile)
+        SOM_FUNC(loadPngImageFromFile),
+        SOM_FUNC(getFont)
     )
     SOM_PASSPORT_END
 };
@@ -173,7 +175,7 @@ class Image : public sciter::om::asset<Image> {
     int getWidth();
     int getHeight();
     int setMaskImage(sciter::value);
-    HPDF_Image getImage();
+    HPDF_Image get();
 
     SOM_PASSPORT_BEGIN(Image)
     SOM_PASSPORT_FLAGS(SOM_SEALED_OBJECT)
@@ -183,6 +185,31 @@ class Image : public sciter::om::asset<Image> {
         SOM_FUNC(getHeight),
         SOM_FUNC(setMaskImage)
     )
+    SOM_PASSPORT_END
+};
+
+class Font : public sciter::om::asset<Image> {
+    HPDF_Doc    pdf;
+    HPDF_Font   font;
+
+  public:
+
+    Font(HPDF_Doc& _pdf, const char* name, sciter::value encoding) : pdf(_pdf) {
+      if(encoding.is_string()){
+        font = HPDF_GetFont(pdf, name, aux::w2a(encoding.to_string().c_str()));
+      }
+      else {
+        font = HPDF_GetFont(pdf, name, NULL);
+      }
+    }
+    virtual ~Font() {};
+    HPDF_Font get() {
+      return font;
+    };
+
+    SOM_PASSPORT_BEGIN(Font)
+    SOM_PASSPORT_FLAGS(SOM_SEALED_OBJECT)
+    SOM_FUNCS()
     SOM_PASSPORT_END
 };
 

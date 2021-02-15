@@ -54,9 +54,8 @@ int Page::endText() {
     return HPDF_Page_EndText (page);
 }
 
-int Page::setFontAndSize(sciter::astring name, HPDF_REAL font_size) {
-    HPDF_Font font = HPDF_GetFont (pdf, name.c_str(), "UTF-8");
-    return HPDF_Page_SetFontAndSize (page, font, font_size);
+int Page::setFontAndSize(sciter::value font, HPDF_REAL font_size) {
+    return HPDF_Page_SetFontAndSize (page, font.get_asset<Font>()->get(), font_size);
 }
 
 int Page::moveTo(HPDF_REAL x, HPDF_REAL y) {
@@ -101,7 +100,7 @@ int Page::drawImage(sciter::value img, sciter::value rect) {
     HPDF_REAL y = rect.get_item("y").get<HPDF_REAL>();
     HPDF_REAL w = rect.get_item("w").get<HPDF_REAL>();
     HPDF_REAL h = rect.get_item("h").get<HPDF_REAL>();
-    return HPDF_Page_DrawImage(page, img.get_asset<Image>()->getImage(), x, y, w, h);
+    return HPDF_Page_DrawImage(page, img.get_asset<Image>()->get(), x, y, w, h);
 }
 
 int Page::circle(HPDF_REAL x, HPDF_REAL y, HPDF_REAL radius) {

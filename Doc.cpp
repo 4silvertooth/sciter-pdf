@@ -235,6 +235,11 @@ sciter::value Doc::loadTTFontFromFile(sciter::astring path, HPDF_BOOL embed) {
     return sciter::value::make_string(font_name);
 }
 
+sciter::value Doc::getFont(sciter::astring name, sciter::value encoding) {
+  auto ret = new libharu::Font(pdf, name.c_str(), encoding);
+  return sciter::value::wrap_asset(ret);
+}
+
 int Doc::setPassword(sciter::astring owner, sciter::astring user) {
     return HPDF_SetPassword(pdf, owner.c_str(), user.c_str() );
 }

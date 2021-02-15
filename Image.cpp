@@ -18,12 +18,11 @@ int Image::getHeight() {
     return HPDF_Image_GetHeight(image);
 }
 
-int Image::setMaskImage(sciter::value _mask) {
-    Image* mask = _mask.get_asset<Image>();
-    return HPDF_Image_SetMaskImage(image, mask->getImage());
+int Image::setMaskImage(sciter::value mask) {
+    return HPDF_Image_SetMaskImage(image, mask.get_asset<Image>()->get());
 }
 
-HPDF_Image Image::getImage() {
+HPDF_Image Image::get() {
     return image;
 }
 
