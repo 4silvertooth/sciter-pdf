@@ -24,7 +24,7 @@ where `[OPTION]` is your prefered platform in premake5, and `"PATH/TO/SCITER-SDK
 
 Open the generated project from `/build` and compile.
 
-**Usage**
+**Usage** Sciter
 
 ```html
 <html>
@@ -40,7 +40,7 @@ event click $(button) {
   page.setSize(page.SIZE_A4, page.PORTRAIT);
   const h = page.getHeight();
 
-  const font = Doc.getFont("Helvetica", NULL);
+  const font = Doc.getFont("Helvetica", "");
   page.setFontAndSize(font, 12);
 
   page.beginText();
@@ -67,4 +67,50 @@ event click $(button) {
   <button>CLICK TO GENERATE PDF</button>
 </body>
 </html>
+```
+
+**Usage** Sciter.JS
+
+```html
+<html>
+<head>
+
+<script type="text/tiscript">
+include library "sciter-pdf";
+
+event click $(button) {
+  Doc.newDoc();
+
+  const page = Doc.addPage();
+  page.setSize(page.SIZE_A4, page.PORTRAIT);
+  const h = page.getHeight();
+
+  const font = Doc.getFont("Helvetica", "");
+  page.setFontAndSize(font, 12);
+
+  page.beginText();
+  page.textRect(
+    {
+      left: 20, 
+      top: h-20, 
+      right: 100, 
+      bottom: 50
+    }, 
+    "HELLO PDF", 
+    page.TALIGN_LEFT
+  );
+  page.endText();
+
+  Doc.save(URL.toPath(self.url('test.pdf')));
+  Sciter.launch(self.url('test.pdf'));
+
+}
+
+</script>
+</head>
+<body>
+  <button>CLICK TO GENERATE PDF</button>
+</body>
+</html>
+```
 ```

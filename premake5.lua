@@ -34,10 +34,12 @@ workspace "sciter-pdf"
     location "build"
     configurations { "DebugStatic", "DebugDLL", "ReleaseStatic", "ReleaseDLL" }
     platforms { "Win32", "Win64" }
+    
+    cppdialect "C++14" 
+
+    staticruntime "On"
 
     startproject "sciter-pdf" 
-
-    staticruntime "Off"
 
     filter "configurations:Debug"
         defines { "DEBUG" }
