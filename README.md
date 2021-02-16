@@ -40,7 +40,7 @@ event click $(button) {
   page.setSize(page.SIZE_A4, page.PORTRAIT);
   const h = page.getHeight();
 
-  const font = Doc.getFont("Helvetica", "");
+  const font = Doc.getFont("Helvetica", null);
   page.setFontAndSize(font, 12);
 
   page.beginText();
@@ -85,7 +85,7 @@ event click $(button) {
   page.setSize(page.SIZE_A4, page.PORTRAIT);
   const h = page.getHeight();
 
-  const font = Doc.getFont("Helvetica", "");
+  const font = Doc.getFont("Helvetica", null);
   page.setFontAndSize(font, 12);
 
   page.beginText();
