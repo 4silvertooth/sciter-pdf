@@ -106,4 +106,5 @@ int Page::drawImage(sciter::value img, sciter::value rect) {
 int Page::circle(HPDF_REAL x, HPDF_REAL y, HPDF_REAL radius) {
     return HPDF_Page_Circle(page, x, y, radius);
 }
+
 }

@@ -235,7 +235,7 @@ sciter::value Doc::loadTTFontFromFile(sciter::astring path, HPDF_BOOL embed) {
     return sciter::value::make_string(font_name);
 }
 
-sciter::value Doc::getFont(sciter::astring name, sciter::astring encoding) {
+sciter::value Doc::getFont(sciter::astring name, sciter::value encoding) {
   auto ret = new libharu::Font(pdf, name.c_str(), encoding);
   return sciter::value::wrap_asset(ret);
 }

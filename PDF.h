@@ -135,7 +135,7 @@ class Doc : public sciter::om::asset<Doc> {
     int setPassword(sciter::astring, sciter::astring);
     sciter::value loadJpegImageFromFile(sciter::astring);
     sciter::value loadPngImageFromFile(sciter::astring);
-    sciter::value getFont(sciter::astring, sciter::astring);
+    sciter::value getFont(sciter::astring, sciter::value);
 
     SOM_PASSPORT_BEGIN(Doc)
     SOM_PASSPORT_FLAGS(SOM_EXTENDABLE_OBJECT)
@@ -191,12 +191,12 @@ class Font : public sciter::om::asset<Image> {
 
   public:
 
-    Font(HPDF_Doc& pdf, const char* name, sciter::astring encoding) {
-      if(!encoding.empty()){
-        font = HPDF_GetFont(pdf, name, encoding.c_str());
+    Font(HPDF_Doc& pdf, const char* name, sciter::value encoding) {
+      if(encoding.is_null()){
+        font = HPDF_GetFont(pdf, name, NULL);
       }
       else {
-        font = HPDF_GetFont(pdf, name, NULL);
+        font = HPDF_GetFont(pdf, name, aux::w2a(encoding.to_string()));
       }
     }
     virtual ~Font() {};
