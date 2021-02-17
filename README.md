@@ -7,6 +7,7 @@ Sciter binding for [libharu pdf library](https://github.com/libharu/libharu)
 You will need both `cmake` and `premake5` to build this project, `cmake` to `configure` libharu and `premake5` to generate `sicter-pdf` project. 
 
 Download cmake from [https://cmake.org/download/](https://cmake.org/download/)
+
 Download premake5 from [https://premake.github.io/](https://premake.github.io/)
 
 ```sh
@@ -23,9 +24,8 @@ cmake -S ./sub-modules/libharu -B ./sub-modules/libharu/build
 ./premake5 [ACTION] --sciter="PATH/TO/SCITER-SDK"
 ```
 &nbsp;
+where `[ACTION]` is your prefered ACTION supported by premake5, use `./premake5 --help` for supported actions, and `"PATH/TO/SCITER-SDK"` is well path to sciter-sdk. 
 
-<sub>where `[ACTION]` is your prefered ACTION supported by premake5, use `./premake5 --help` for supported actions, and `"PATH/TO/SCITER-SDK"` is well path to sciter-sdk. 
-</sub>
 Open the generated project from `/build` and compile.
 
 **Usage** Sciter
