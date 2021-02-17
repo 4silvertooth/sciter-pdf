@@ -21,14 +21,18 @@ cd sciter-pdf
 cmake -S ./sub-modules/libharu -B ./sub-modules/libharu/build
 
 #will generate project to build both
-./premake5 [ACTION] --sciter="PATH/TO/SCITER-SDK"
+./premake5.exe [ACTION] --sciter="PATH/TO/SCITER-SDK"
 ```
-&nbsp;
-where `[ACTION]` is your prefered ACTION supported by premake5, use `./premake5 --help` for supported actions, and `"PATH/TO/SCITER-SDK"` is well path to sciter-sdk. 
+where **[ACTION]** is your prefered **ACTION** supported by premake5, use `./premake5 --help` for supported actions, and `"PATH/TO/SCITER-SDK"` is well path to sciter-sdk.
+
+### Example:
+> ./premake5.exe vs2019 --sciter=c:/github/sciter-sdk
+
+will generate a `visual studio 2019` project named `sciter-pdf.sln` in the /build directory.
 
 Open the generated project from `/build` and compile.
 
-**Usage** Sciter
+### Usage Sciter
 
 ```html
 <html>
@@ -73,7 +77,7 @@ event click $(button) {
 </html>
 ```
 
-**Usage** Sciter.JS
+### Usage Sciter.JS
 
 ```html
 <html>
