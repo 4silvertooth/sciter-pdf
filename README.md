@@ -79,10 +79,15 @@ event click $(button) {
 <html>
 <head>
 
-<script type="text/tiscript">
-include library "sciter-pdf";
+<script type="module">
 
-event click $(button) {
+import { loadLibrary } from "@sciter";
+import { launch } from "@env";
+
+// loading and adding PDFDoc to global namespace: 
+globalThis.Doc = loadLibrary("sciter-pdf");
+
+document.on("click", "button", function() {
   Doc.newDoc();
 
   const page = Doc.addPage();
@@ -105,10 +110,10 @@ event click $(button) {
   );
   page.endText();
 
-  Doc.save(URL.toPath(self.url('test.pdf')));
-  Sciter.launch(self.url('test.pdf'));
+  Doc.save(URL.toPath(document.url('test.pdf')));
+  launch(document.url('test.pdf'));
 
-}
+});
 
 </script>
 </head>
@@ -116,5 +121,4 @@ event click $(button) {
   <button>CLICK TO GENERATE PDF</button>
 </body>
 </html>
-```
 ```
