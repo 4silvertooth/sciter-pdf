@@ -21,9 +21,10 @@ cd sciter-pdf
 cmake -S ./sub-modules/libharu -B ./sub-modules/libharu/build
 
 #will generate project to build both
-./premake5.exe [ACTION] --sciter="PATH/TO/SCITER-SDK"
+./premake5.exe [TARGET] --sciter="PATH/TO/SCITER-SDK"
 ```
-where **[ACTION]** is your prefered **ACTION** supported by premake5, use `./premake5 --help` for supported actions, and `"PATH/TO/SCITER-SDK"` is well path to sciter-sdk.
+where **[TARGET]** is your prefered **TARGET** supported by premake5, use `./premake5 --help` for supported actions/target, 
+and `"PATH/TO/SCITER-SDK"` is well path to sciter-sdk.
 
 ### Example:
 > ./premake5.exe vs2019 --sciter=c:/github/sciter-sdk
@@ -126,3 +127,5 @@ document.on("click", "button", function() {
 </body>
 </html>
 ```
+
+### [More in Wiki](https://github.com/4silvertooth/sciter-pdf/wiki)

@@ -10,30 +10,30 @@ class Image;
 class Page : public sciter::om::asset<Page> {
     HPDF_Page page;
 
-    sciter::value TALIGN_LEFT = HPDF_TALIGN_LEFT;
-    sciter::value TALIGN_RIGHT = HPDF_TALIGN_RIGHT;
-    sciter::value TALIGN_CENTER = HPDF_TALIGN_CENTER;
-    sciter::value TALIGN_JUSTIFY = HPDF_TALIGN_JUSTIFY;
+    sciter::value TALIGN_LEFT = (int)HPDF_TALIGN_LEFT;
+    sciter::value TALIGN_RIGHT = (int)HPDF_TALIGN_RIGHT;
+    sciter::value TALIGN_CENTER = (int)HPDF_TALIGN_CENTER;
+    sciter::value TALIGN_JUSTIFY = (int)HPDF_TALIGN_JUSTIFY;
     /**
-    sciter::value TALIGN_TOP = HPDF_TALIGN_TOP;
-    sciter::value TALIGN_BOTTOM = HPDF_TALIGN_BOTTOM;
-    sciter::value TALIGN_MIDDLE = HPDF_TALIGN_MIDDLE;
+    sciter::value TALIGN_TOP = (int)HPDF_TALIGN_TOP;
+    sciter::value TALIGN_BOTTOM = (int)HPDF_TALIGN_BOTTOM;
+    sciter::value TALIGN_MIDDLE = (int)HPDF_TALIGN_MIDDLE;
     */
-    sciter::value SIZE_LETTER = HPDF_PAGE_SIZE_LETTER;
-    sciter::value SIZE_LEGAL = HPDF_PAGE_SIZE_LEGAL;
-    sciter::value SIZE_A3 = HPDF_PAGE_SIZE_A3;
-    sciter::value SIZE_A4 = HPDF_PAGE_SIZE_A4;
-    sciter::value SIZE_A5 = HPDF_PAGE_SIZE_A5;
-    sciter::value SIZE_B4 = HPDF_PAGE_SIZE_B4;
-    sciter::value SIZE_B5 = HPDF_PAGE_SIZE_B5;
-    sciter::value SIZE_EXECUTIVE = HPDF_PAGE_SIZE_EXECUTIVE;
-    sciter::value SIZE_US4x6 = HPDF_PAGE_SIZE_US4x6;
-    sciter::value SIZE_US4x8 = HPDF_PAGE_SIZE_US4x8;
-    sciter::value SIZE_US5x7 = HPDF_PAGE_SIZE_US5x7;
-    sciter::value SIZE_COMM10 = HPDF_PAGE_SIZE_COMM10;
+    sciter::value SIZE_LETTER = (int)HPDF_PAGE_SIZE_LETTER;
+    sciter::value SIZE_LEGAL = (int)HPDF_PAGE_SIZE_LEGAL;
+    sciter::value SIZE_A3 = (int)HPDF_PAGE_SIZE_A3;
+    sciter::value SIZE_A4 = (int)HPDF_PAGE_SIZE_A4;
+    sciter::value SIZE_A5 = (int)HPDF_PAGE_SIZE_A5;
+    sciter::value SIZE_B4 = (int)HPDF_PAGE_SIZE_B4;
+    sciter::value SIZE_B5 = (int)HPDF_PAGE_SIZE_B5;
+    sciter::value SIZE_EXECUTIVE = (int)HPDF_PAGE_SIZE_EXECUTIVE;
+    sciter::value SIZE_US4x6 = (int)HPDF_PAGE_SIZE_US4x6;
+    sciter::value SIZE_US4x8 = (int)HPDF_PAGE_SIZE_US4x8;
+    sciter::value SIZE_US5x7 = (int)HPDF_PAGE_SIZE_US5x7;
+    sciter::value SIZE_COMM10 = (int)HPDF_PAGE_SIZE_COMM10;
 
-    sciter::value PORTRAIT = HPDF_PAGE_PORTRAIT;
-    sciter::value LANDSCAPE = HPDF_PAGE_LANDSCAPE;
+    sciter::value PORTRAIT = (int)HPDF_PAGE_PORTRAIT;
+    sciter::value LANDSCAPE = (int)HPDF_PAGE_LANDSCAPE;
 
   public:
 
