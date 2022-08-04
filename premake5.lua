@@ -34,8 +34,8 @@ workspace "sciter-pdf"
     location "build"
     configurations { "DebugStatic", "DebugDLL", "ReleaseStatic", "ReleaseDLL" }
     platforms { "Win32", "Win64" }
-    
     cppdialect "C++14" 
+    systemversion "latest"
 
     staticruntime "On"
 
@@ -62,6 +62,7 @@ outputdir = "lib/"
 project "sciter-pdf"
     language "C++"
     filter "system:windows"
+      toolset "v141"
       files {"sciter-pdf.def" }
     filter {}
 
