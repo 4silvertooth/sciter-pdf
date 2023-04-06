@@ -30,6 +30,10 @@ int Page::rectangle(HPDF_REAL x, HPDF_REAL y, HPDF_REAL w, HPDF_REAL h) {
     return HPDF_Page_Rectangle (page, x, y, w, h);
 }
 
+int Page::fill() {
+    return HPDF_Page_Fill (page);
+}
+
 int Page::stroke() {
     return HPDF_Page_Stroke (page);
 }
@@ -66,6 +70,11 @@ int Page::lineTo(HPDF_REAL x, HPDF_REAL y) {
     return HPDF_Page_LineTo(page, x, y);
 }
 
+int  Page::setDash(){
+    const HPDF_UINT16 DASH_MODE1[] = {2, 1};
+    return HPDF_Page_SetDash (page, DASH_MODE1, 1, 1);
+}
+
 int Page::measureText(sciter::astring text, HPDF_REAL width, HPDF_BOOL wordwrap) {
     return HPDF_Page_MeasureText(page, text.c_str(), width, wordwrap, NULL);
 }
@@ -79,8 +88,16 @@ int Page::textRect(sciter::value rect, sciter::astring text, int align) {
     return HPDF_Page_TextRect(page, left, top, right, bottom, text.c_str(),(HPDF_TextAlignment)align, NULL);
 }
 
+int Page::setGrayStroke(HPDF_REAL g) {
+    return HPDF_Page_SetGrayStroke(page, g);
+}
+
 int Page::setRGBStroke(HPDF_REAL r, HPDF_REAL g, HPDF_REAL b) {
     return HPDF_Page_SetRGBStroke (page, r, g, b);
+}
+
+int Page::setRGBFill(HPDF_REAL r, HPDF_REAL g, HPDF_REAL b) {
+    return HPDF_Page_SetRGBFill (page, r, g, b);
 }
 
 int Page::setCharSpace(HPDF_REAL value) {
@@ -106,5 +123,24 @@ int Page::drawImage(sciter::value img, sciter::value rect) {
 int Page::circle(HPDF_REAL x, HPDF_REAL y, HPDF_REAL radius) {
     return HPDF_Page_Circle(page, x, y, radius);
 }
+
+void Page::createTextAnnot(sciter::value rect, sciter::astring text) {
+    HPDF_REAL left   = rect.get_item("left")  .get<HPDF_REAL>();
+    HPDF_REAL top    = rect.get_item("top")   .get<HPDF_REAL>();
+    HPDF_REAL right  = rect.get_item("right") .get<HPDF_REAL>();
+    HPDF_REAL bottom = rect.get_item("bottom").get<HPDF_REAL>();
+    HPDF_Rect r = { left, top, right, bottom };
+    HPDF_Page_CreateTextAnnot (page, r, text.c_str(), NULL);
+}
+
+void Page::createSquigglyAnnot(sciter::value rect, sciter::astring text) {
+    HPDF_REAL left = rect.get_item("left").get<HPDF_REAL>();
+    HPDF_REAL top = rect.get_item("top").get<HPDF_REAL>();
+    HPDF_REAL right = rect.get_item("right").get<HPDF_REAL>();
+    HPDF_REAL bottom = rect.get_item("bottom").get<HPDF_REAL>();
+    HPDF_Rect r = { left, top, right, bottom };
+    HPDF_Page_CreateSquigglyAnnot(page, r, text.c_str(), NULL);
+}
+
 
 }

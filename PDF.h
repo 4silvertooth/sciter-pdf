@@ -63,6 +63,7 @@ class Page : public sciter::om::asset<Page> {
     int setSize(int, int);
     int setLineWidth(HPDF_REAL);
     int rectangle(HPDF_REAL, HPDF_REAL, HPDF_REAL, HPDF_REAL);
+    int fill();
     int stroke();
     int beginText();
     int textOut(HPDF_REAL, HPDF_REAL, sciter::astring);
@@ -72,14 +73,19 @@ class Page : public sciter::om::asset<Page> {
     int setFontAndSize(sciter::value, HPDF_REAL);
     int moveTo(HPDF_REAL, HPDF_REAL);
     int lineTo(HPDF_REAL, HPDF_REAL);
+    int setDash();
     int measureText(sciter::astring, HPDF_REAL, HPDF_BOOL);
     int textRect(sciter::value, sciter::astring, int);
     int setRGBStroke(HPDF_REAL, HPDF_REAL, HPDF_REAL);
+    int setGrayStroke(HPDF_REAL);
+    int setRGBFill(HPDF_REAL, HPDF_REAL, HPDF_REAL);
     int setCharSpace(HPDF_REAL);
     int setWordSpace(HPDF_REAL);
     int setTextLeading(HPDF_REAL);
     int drawImage(sciter::value, sciter::value);
     int circle(HPDF_REAL, HPDF_REAL, HPDF_REAL);
+    void createTextAnnot(sciter::value, sciter::astring);
+    void createSquigglyAnnot(sciter::value, sciter::astring);
 
     SOM_PASSPORT_BEGIN(Page)
     SOM_PASSPORT_FLAGS(SOM_EXTENDABLE_OBJECT)
@@ -91,6 +97,7 @@ class Page : public sciter::om::asset<Page> {
         SOM_FUNC(setSize),
         SOM_FUNC(setLineWidth),
         SOM_FUNC(rectangle),
+        SOM_FUNC(fill),
         SOM_FUNC(stroke),
         SOM_FUNC(setFontAndSize),
         SOM_FUNC(beginText),
@@ -102,12 +109,17 @@ class Page : public sciter::om::asset<Page> {
         SOM_FUNC(endText),
         SOM_FUNC(moveTo),
         SOM_FUNC(lineTo),
+        SOM_FUNC(setDash),
+        SOM_FUNC(setGrayStroke),
         SOM_FUNC(setRGBStroke),
+        SOM_FUNC(setRGBFill),
         SOM_FUNC(setCharSpace),
         SOM_FUNC(setWordSpace),
         SOM_FUNC(setTextLeading),
         SOM_FUNC(drawImage),
-        SOM_FUNC(circle)
+        SOM_FUNC(circle),
+        SOM_FUNC(createTextAnnot),
+        SOM_FUNC(createSquigglyAnnot),
     )
     SOM_PROPS(
         SOM_RO_PROP(TALIGN_LEFT),
@@ -215,12 +227,19 @@ class Font : public sciter::om::asset<Font> {
       }
     }
     virtual ~Font() {};
+    int getUnicodeWidth(sciter::string code){
+        return HPDF_Font_GetUnicodeWidth(font, code[0]);
+    }
+
     HPDF_Font get() {
       return font;
     };
 
     SOM_PASSPORT_BEGIN(Font)
     SOM_PASSPORT_FLAGS(SOM_SEALED_OBJECT)
+    SOM_FUNCS(
+        SOM_FUNC(getUnicodeWidth)
+    )
     SOM_PASSPORT_END
 };
 
