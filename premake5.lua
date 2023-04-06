@@ -31,38 +31,46 @@ function includeHaru()
 end	
 
 workspace "sciter-pdf"
-    location "build"
-    configurations { "DebugStatic", "DebugDLL", "ReleaseStatic", "ReleaseDLL" }
-    platforms { "Win32", "Win64" }
-    cppdialect "C++14" 
+  configurations { "Debug", "Release" }
+  cppdialect "C++14" 
+  staticruntime "On"
+  kind "SharedLib"
+
+  filter "system:windows"
+    configurations { "Debug", "Release" }
+    location ("build/" .. _TARGET_OS)
+    platforms { "x32", "x64", "arm64" }
     systemversion "latest"
 
-    staticruntime "On"
+  filter {}
 
-    startproject "sciter-pdf" 
+  filter "system:linux"
+    configurations { "Debug", "Release" }
+    location ("build/" .. _TARGET_OS)
+    platforms { "x32", "x64", "arm64" }
+    systemversion "latest"
 
-    filter "configurations:Debug"
-        defines { "DEBUG" }
-        symbols "On"
+  filter "configurations:Debug"
+    defines { "DEBUG" }
+    symbols "On"
 
-    filter "configurations:Release"
-        defines { "NDEBUG" }
-        optimize "On"
+  filter "configurations:Release"
+    defines { "NDEBUG" }
+    optimize "On"
 
-    filter "platforms:Win32"
-        system "Windows"
-        architecture "x86"
+  filter "platforms:x32"
+    architecture "x86"
 
-    filter "platforms:Win64"
-        system "Windows"
-        architecture "x86_64"
+  filter "platforms:x64"
+    architecture "x86_64"
 
 outputdir = "lib/"
     
 project "sciter-pdf"
     language "C++"
+
     filter "system:windows"
-      toolset "v141"
+      toolset "v143"
       files {"sciter-pdf.def" }
     filter {}
 
@@ -77,10 +85,4 @@ project "sciter-pdf"
     }
     
     includeSciter()
-    includeHaru()    
-    
-    filter "*Static"
-      kind "StaticLib"
-
-    filter "*DLL"
-      kind "SharedLib"
+    includeHaru()

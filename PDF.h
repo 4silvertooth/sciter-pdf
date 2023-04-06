@@ -5,20 +5,17 @@
 #include "aux-cvt.h"
 #include "hpdf.h"
 
-namespace sciter {
-    inline sciter::value setter(const HPDF_TextAlignment& value) {
-        return (int)value;
-    }
-
-    inline sciter::value setter(const HPDF_PageDirection& value) {
-        return (int)value;
-    }
-
-    inline sciter::value setter(const HPDF_PageSizes& value) {
-        return (int)value;
-    }
+inline sciter::value setter(const HPDF_TextAlignment& value) {
+    return (int)value;
 }
- 
+
+inline sciter::value setter(const HPDF_PageDirection& value) {
+    return (int)value;
+}
+
+inline sciter::value setter(const HPDF_PageSizes& value) {
+    return (int)value;
+}
 
 namespace libharu {
 class Image;
