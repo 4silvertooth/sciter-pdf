@@ -71,7 +71,7 @@ int Page::lineTo(HPDF_REAL x, HPDF_REAL y) {
 }
 
 int  Page::setDash(){
-    const HPDF_UINT16 DASH_MODE1[] = {2, 1};
+    const HPDF_REAL DASH_MODE1[] = {2.0f, 1.0f};
     return HPDF_Page_SetDash (page, DASH_MODE1, 1, 1);
 }
 
