@@ -7,6 +7,8 @@ on:
 
 jobs:
   build:
+    env:
+      BUILD_TYPE: Release
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
