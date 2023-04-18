@@ -9,36 +9,36 @@ set(CMAKE_CXX_STANDARD 14)
 #set(CMAKE_CXX_FLAGS_DEBUG "/MTd")
 if (UNIX AND NOT APPLE)
   find_package(PkgConfig REQUIRED)
-  pkg_check_modules(GTK REQUIRED gtkmm-3.0)
-  include_directories(${GTKMM_INCLUDE_DIRS})  
+  pkg_check_modules(GTK REQUIRED libgtk-3-dev)
+  include_directories(${LIBGTK_INCLUDE_DIRS})  
 endif (UNIX)
 
 FetchContent_Declare(libpng
   GIT_REPOSITORY  https://github.com/glennrp/libpng.git
   GIT_TAG         v1.6.39
-  GIT_SHALLOW     true
-  GIT_PROGRESS    true  
+  GIT_SHALLOW     TRUE
+  GIT_PROGRESS    TRUE
 )
 
 FetchContent_Declare(zlib
   GIT_REPOSITORY  https://github.com/madler/zlib.git
   GIT_TAG         v1.2.13
-  GIT_SHALLOW     true
-  GIT_PROGRESS TRUE  
+  GIT_SHALLOW     TRUE
+  GIT_PROGRESS    TRUE
 )
 
 FetchContent_Declare(libharu
   GIT_REPOSITORY  https://github.com/libharu/libharu.git
   GIT_TAG         8dbcfe470581edc4bc52c3ef132d410e66cadc20
-  GIT_SHALLOW     true
-  GIT_PROGRESS    true  
+  GIT_SHALLOW     TRUE
+  GIT_PROGRESS    TRUE
   OVERRIDE_FIND_PACKAGE
 )
 
 FetchContent_Declare(sciter
   GIT_REPOSITORY  https://gitlab.com/sciter-engine/sciter-js-sdk.git
   GIT_TAG         e1097e0351ca989171967e47a7fe26db4d23cc9a
-  GIT_SHALLOW     true
+  GIT_SHALLOW     TRUE
   CONFIGURE_COMMAND ""
   BUILD_COMMAND     ""
   INSTALL_COMMAND   ""  
