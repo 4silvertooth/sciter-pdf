@@ -7,6 +7,11 @@ project(sciter-pdf)
 set(CMAKE_CXX_STANDARD 14)
 #set(CMAKE_CXX_FLAGS_RELEASE "/MT")
 #set(CMAKE_CXX_FLAGS_DEBUG "/MTd")
+if (UNIX AND NOT APPLE)
+  find_package(PkgConfig REQUIRED)
+  pkg_check_modules(GTK REQUIRED gtkmm-3.0)
+  include_directories(${GTKMM_INCLUDE_DIRS})  
+endif (UNIX)
 
 FetchContent_Declare(libpng
   GIT_REPOSITORY  https://github.com/glennrp/libpng.git
@@ -94,4 +99,7 @@ include_directories(
 )
 
 add_library(sciter-pdf SHARED Doc.cpp Image.cpp Page.cpp PDF.cpp PDF.h sciter-pdf.def)
+target_link_libraries(sciter-pdf PUBLIC ${HPDF_LIBRARY})
+
+add_library(sciter-pdf-static STATIC Doc.cpp Image.cpp Page.cpp PDF.cpp PDF.h sciter-pdf.def)
 target_link_libraries(sciter-pdf PUBLIC ${HPDF_LIBRARY})
