@@ -36,7 +36,7 @@ jobs:
           title: "sciter-pdf"
           files: |
             build/Release/sciter-pdf.dll
-            build/Release/libsciter-pdf.dylib
+            lib/libsciter-pdf.dylib
             build/Release/libsciter-pdf.so
             
             

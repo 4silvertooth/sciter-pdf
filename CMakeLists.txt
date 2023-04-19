@@ -15,7 +15,7 @@ set(CMAKE_CXX_STANDARD 14)
 if (UNIX AND NOT APPLE)
   find_package(PkgConfig REQUIRED)
   pkg_check_modules(GTK REQUIRED gtk+-3.0)
-  include_directories(${GTK3_INCLUDE_DIRS})  
+  include_directories(${GTK_INCLUDE_DIRS})  
 endif (UNIX AND NOT APPLE)
 
 FetchContent_Declare(libpng
