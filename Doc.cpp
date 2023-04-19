@@ -1,7 +1,7 @@
 #include "PDF.h"
 #include <sstream>
 
-static char* error_message(unsigned int error_no) {
+static char const *error_message(unsigned int error_no) {
     switch(error_no) {
     case 0x1001:
         return "Internal error. The consistency of the data was lost.";

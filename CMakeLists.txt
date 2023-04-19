@@ -1,9 +1,13 @@
 cmake_minimum_required(VERSION 3.22)
+project(sciter-pdf)
+
 include(FetchContent)
+
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 set(SKIP_INSTALL_EXPORT TRUE)
 set(FETCHCONTENT_QUIET FALSE)
-project(sciter-pdf)
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(CMAKE_CXX_STANDARD 14)
 #set(CMAKE_CXX_FLAGS_RELEASE "/MT")
