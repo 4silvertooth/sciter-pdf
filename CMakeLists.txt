@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.22)
 include(FetchContent)
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 set(SKIP_INSTALL_EXPORT TRUE)
+set(FETCHCONTENT_QUIET FALSE)
 project(sciter-pdf)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -11,7 +12,7 @@ if (UNIX AND NOT APPLE)
   find_package(PkgConfig REQUIRED)
   pkg_check_modules(GTK REQUIRED gtk+-3.0)
   include_directories(${GTK3_INCLUDE_DIRS})  
-endif (UNIX)
+endif (UNIX AND NOT APPLE)
 
 FetchContent_Declare(libpng
   GIT_REPOSITORY  https://github.com/glennrp/libpng.git
@@ -35,14 +36,23 @@ FetchContent_Declare(libharu
   OVERRIDE_FIND_PACKAGE
 )
 
-FetchContent_Declare(sciter
+#[[FetchContent_Declare(sciter
   GIT_REPOSITORY  https://gitlab.com/sciter-engine/sciter-js-sdk.git
-  GIT_TAG         e1097e0351ca989171967e47a7fe26db4d23cc9a
+  GIT_TAG         5.0.2.14
   GIT_SHALLOW     TRUE
+  GIT_PROGRESS    TRUE
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND     ""
+  INSTALL_COMMAND   ""  
+)]]
+
+FetchContent_Declare(sciter
+  URL https://gitlab.com/sciter-engine/sciter-js-sdk/-/archive/5.0.2.14/sciter-js-sdk-5.0.2.14.zip
   CONFIGURE_COMMAND ""
   BUILD_COMMAND     ""
   INSTALL_COMMAND   ""  
 )
+
 
 FetchContent_GetProperties(zlib)
 if(NOT zlib_POPULATED)
