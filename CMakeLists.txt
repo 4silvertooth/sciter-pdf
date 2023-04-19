@@ -61,17 +61,14 @@ FetchContent_Declare(sciter
 FetchContent_GetProperties(zlib)
 if(NOT zlib_POPULATED)
   FetchContent_Populate(zlib)
-
-  set(ZLIB_INCLUDE_DIR ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR})
-  set(ZLIB_LIBRARY zlibstatic)
-
   execute_process(
     COMMAND           ${GIT_EXECUTABLE} apply ${CMAKE_CURRENT_LIST_DIR}/cmake/zlib.patch
     WORKING_DIRECTORY ${zlib_SOURCE_DIR}
-    OUTPUT_QUIET
-    ERROR_QUIET
+    #OUTPUT_QUIET
+    #ERROR_QUIET
   )
-
+  set(ZLIB_INCLUDE_DIR ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR})
+  set(ZLIB_LIBRARY zlibstatic)
   set(CMAKE_PROJECT_INCLUDE_BEFORE "${CMAKE_CURRENT_SOURCE_DIR}/cmake/enable_cmp0048.cmake")
   add_subdirectory(${zlib_SOURCE_DIR} ${zlib_BINARY_DIR} EXCLUDE_FROM_ALL)
   unset(CMAKE_PROJECT_INCLUDE_BEFORE)
