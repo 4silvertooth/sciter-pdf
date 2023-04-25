@@ -30,7 +30,7 @@ jobs:
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
     
     - name: Upload .dll file (if any exists)
-      if: ${{ runner.os == 'windows-latest' }}
+      if: ${{ matrix.os == 'windows-latest' }}
       uses: actions/upload-artifact@v3
       with:
         name: sciter-pdf-${{ matrix.os }}.dll
@@ -38,7 +38,7 @@ jobs:
         retention-days: 1
     
     - name: Upload .so file (if any exists)
-      if: ${{ runner.os == 'ubuntu-latest' }}
+      if: ${{ matrix.os == 'ubuntu-latest' }}
       uses: actions/upload-artifact@v3
       with:
         name: sciter-pdf-${{ matrix.os }}.so
@@ -46,9 +46,31 @@ jobs:
         retention-days: 1
     
     - name: Upload .dylib file (if any exists)
-      if: ${{ runner.os == 'macos-latest' }}
+      if: ${{ matrix.os == 'macos-latest' }}
       uses: actions/upload-artifact@v3
       with:
         name: sciter-pdf-${{ matrix.os }}.dylib
         path: build/*.dylib
         retention-days: 1
+
+  release:
+    name: "Prelease"
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # We don't need the repo, grab all artifacts from the build stage
+      # The plugin puts each artifact in a folder of `artifactname`
+      - uses: actions/download-artifact@v3
+      - name: Display fetched artifacts
+        run: ls -R
+      - name: Emit a Github Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            sciter-pdf-windows-latest/*.zip
+            sciter-pdf-macos-latest/*.zip
+            sciter-pdf-ubuntu-latest/*.zip
