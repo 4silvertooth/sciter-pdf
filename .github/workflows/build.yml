@@ -33,7 +33,7 @@ jobs:
       if: ${{ matrix.os == 'windows-latest' }}
       uses: actions/upload-artifact@v3
       with:
-        name: sciter-pdf-${{ matrix.os }}.dll
+        name: sciter-pdf.dll
         path: build/Release/*.dll
         retention-days: 1
     
@@ -41,7 +41,7 @@ jobs:
       if: ${{ matrix.os == 'ubuntu-latest' }}
       uses: actions/upload-artifact@v3
       with:
-        name: sciter-pdf-${{ matrix.os }}.so
+        name: sciter-pdf.so
         path: build/*.so
         retention-days: 1
     
@@ -49,7 +49,7 @@ jobs:
       if: ${{ matrix.os == 'macos-latest' }}
       uses: actions/upload-artifact@v3
       with:
-        name: sciter-pdf-${{ matrix.os }}.dylib
+        name: sciter-pdf.dylib
         path: build/*.dylib
         retention-days: 1
 
@@ -71,6 +71,6 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            sciter-pdf-windows-latest/*.zip
-            sciter-pdf-macos-latest/*.zip
-            sciter-pdf-ubuntu-latest/*.zip
+            sciter-pdf.dll
+            sciter-pdf.so
+            sciter-pdf.dylib
