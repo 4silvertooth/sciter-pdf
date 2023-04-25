@@ -92,13 +92,9 @@ if(NOT libpng_POPULATED)
 
 endif()
 
-if (WIN32)
+if (WIN32 OR APPLE)
   find_package(PNG REQUIRED)
-endif (WIN32)
-
-if (APPLE)
-  find_package(PNG REQUIRED)
-endif (APPLE)
+endif ()
 
 FetchContent_GetProperties(libharu)
 if(NOT libharu_POPULATED)
