@@ -81,6 +81,7 @@ if(NOT libpng_POPULATED)
   FetchContent_Populate(libpng)
 
   set(PNG_PNG_INCLUDE_DIR ${libpng_SOURCE_DIR} ${libpng_BINARY_DIR})
+  set(PNG_INCLUDE_DIR ${libpng_SOURCE_DIR} ${libpng_BINARY_DIR})
   set(PNG_LIBRARY png_static)
 
   cmake_policy(SET CMP0077 NEW)
