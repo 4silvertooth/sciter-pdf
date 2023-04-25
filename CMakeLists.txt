@@ -81,7 +81,7 @@ if(NOT libpng_POPULATED)
   FetchContent_Populate(libpng)
 
   set(PNG_PNG_INCLUDE_DIR ${libpng_SOURCE_DIR} ${libpng_BINARY_DIR})
-  set(PNG_INCLUDE_DIR ${libpng_SOURCE_DIR} ${libpng_BINARY_DIR})
+  set(PNG_INCLUDE_DIR ${PNG_PNG_INCLUDE_DIR})
   set(PNG_LIBRARY png_static)
 
   cmake_policy(SET CMP0077 NEW)
@@ -92,7 +92,7 @@ if(NOT libpng_POPULATED)
 
 endif()
 
-find_package(PNG REQUIRED)
+#find_package(PNG REQUIRED)
 
 FetchContent_GetProperties(libharu)
 if(NOT libharu_POPULATED)
