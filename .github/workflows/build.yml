@@ -28,16 +28,27 @@ jobs:
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-          
-    - uses: "marvinpinto/action-automatic-releases@latest"
+    
+    - name: Upload .dll file (if any exists)
+      if: ${{ runner.os == 'windows-latest' }}
+      uses: actions/upload-artifact@v3
       with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          title: "sciter-pdf"
-          files: |
-            build/Release/sciter-pdf.dll
-            build/libsciter-pdf.dylib
-            build/libsciter-pdf.so
-            
-            
-      
+        name: sciter-pdf-${{ matrix.os }}.dll
+        path: build/Release/*.dll
+        retention-days: 1
+    
+    - name: Upload .so file (if any exists)
+      if: ${{ runner.os == 'ubuntu-latest' }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: sciter-pdf-${{ matrix.os }}.so
+        path: build/*.so
+        retention-days: 1
+    
+    - name: Upload .dylib file (if any exists)
+      if: ${{ runner.os == 'macos-latest' }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: sciter-pdf-${{ matrix.os }}.dylib
+        path: build/*.dylib
+        retention-days: 1
