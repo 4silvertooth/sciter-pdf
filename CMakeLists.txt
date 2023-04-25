@@ -74,7 +74,7 @@ if(NOT zlib_POPULATED)
   unset(CMAKE_PROJECT_INCLUDE_BEFORE)
 endif()
 
-find_package(ZLIB REQUIRED)
+#find_package(ZLIB REQUIRED)
 
 if(NOT libpng_POPULATED)
   FetchContent_Populate(libpng)
@@ -90,7 +90,7 @@ if(NOT libpng_POPULATED)
 
 endif()
 
-find_package(PNG REQUIRED)
+#find_package(PNG REQUIRED)
 
 FetchContent_GetProperties(libharu)
 if(NOT libharu_POPULATED)
