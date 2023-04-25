@@ -92,7 +92,7 @@ if(NOT libpng_POPULATED)
 
 endif()
 
-if (NOT UNIX)
+if (WIN32 AND APPLE)
   find_package(PNG REQUIRED)
 endif (NOT UNIX)
 
